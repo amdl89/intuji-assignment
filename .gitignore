@@ -1,0 +1,6 @@
+/vendor/
+/node_modules
+.env
+.phpstorm.meta.php
+/database/*.db
+

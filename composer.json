@@ -1,0 +1,17 @@
+{
+    "name": "amdl89/intuji-assignment",
+    "description": "Demo project that integrates with google calendar api",
+    "type": "project",
+    "license": "mit",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "ext-pdo": "*",
+        "vlucas/phpdotenv": "^5.6",
+        "google/apiclient": "^2.17"
+    }
+}
