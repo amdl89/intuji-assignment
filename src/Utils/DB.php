@@ -9,10 +9,10 @@ class DB
 
     private function __construct()
     {
-        $dbUrl = getenv('DB_URL');
+        $dbConfig = Config::get('db');
 
         try {
-            $this->pdo = new \PDO($dbUrl);
+            $this->pdo = new \PDO($dbConfig['dbUrl']);
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {
             die("Database connection failed: " . $e->getMessage());
