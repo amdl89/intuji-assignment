@@ -1,4 +1,4 @@
 <?php
 require_once __DIR__.'/../bootstrap/app.php';
 
-echo 'Hello';
+\App\Utils\Redirect::path('/welcome.php');
