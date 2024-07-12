@@ -7,10 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= $PAGE_TITLE ?? 'Document'?></title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/app.css">
 
     <script defer src="/assets/js/alpine.js"></script>
     <script defer src="/assets/js/app.js"></script>
 </head>
-<body>
+<body class="bg-body-secondary">
