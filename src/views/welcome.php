@@ -1,5 +1,5 @@
-<?php require __DIR__ . '/partials/header.php' ?>
-<main>
+<?php require __DIR__ . '/Partials/header.php' ?>
+<main class="container">
     Welcome page
 </main>
-<?php require __DIR__ . '/partials/footer.php' ?>
+<?php require __DIR__ . '/Partials/footer.php' ?>
