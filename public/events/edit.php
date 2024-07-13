@@ -34,6 +34,7 @@ function getEvent()
         'timeMax' => date('Y-m-d\TH:i', strtotime($eventObj->getEnd()->getDateTime())),
         'status' => $eventObj->getStatus(),
     ];
+    $eventFormAction = '/events/update.php';
 
     require __DIR__.'/../../src/Views/calendar/editEvent.php';
 }

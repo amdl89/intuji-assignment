@@ -15,5 +15,7 @@ $event = [
     ],
     'status' => 'confirmed',
 ];
+$eventFormAction = '/events/create.php';
+
 require __DIR__.'/../../src/Views/calendar/newEvent.php';
 
