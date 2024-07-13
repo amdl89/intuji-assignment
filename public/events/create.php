@@ -3,24 +3,13 @@ require_once __DIR__.'/../../bootstrap/app.php';
 
 use App\Auth\AuthFactory;
 use App\Database\DBFactory;
-use App\Utils\Config;
+use App\Services\GoogleClientFactory;
 use App\Utils\Redirect;
-use Google\Service\Calendar;
 use Google\Service\Calendar\Event;
 use Google\Service\Calendar\EventDateTime;
 
 function createEvent() {
-    $googleConfig = Config::get('google');
-
-    $auth = AuthFactory::getAuth();
-    $authUserInfo = $auth->getUserInfo();
-
-    $client = new Google_Client();
-    $client->setClientId($googleConfig['google_client_id']);
-    $client->setClientSecret($googleConfig['google_client_secret']);
-    $client->setAccessToken($authUserInfo['calendar_access_token']);
-
-    $service = new Calendar($client);
+    $service = GoogleClientFactory::getCalendarServiceForAuthUser();
 
     $event = new Event([
         'summary' => $_POST['summary'],
@@ -51,12 +40,7 @@ $db = DBFactory::getDB();
 $auth = AuthFactory::getAuth();
 $authUserInfo = $auth->getUserInfo();
 
-$googleConfig = Config::get('google');
-
-$client = new Google_Client();
-$client->setClientId($googleConfig['google_client_id']);
-$client->setClientSecret($googleConfig['google_client_secret']);
-$client->setAccessToken($authUserInfo['calendar_access_token']);
+$client = GoogleClientFactory::getClient($authUserInfo['calendar_access_token']);
 
 try {
     createEvent();

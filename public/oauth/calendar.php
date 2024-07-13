@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/../../bootstrap/app.php';
 
+use App\Services\GoogleClientFactory;
 use App\Utils\Config;
 use App\Utils\Redirect;
 use Google\Service\Calendar;
@@ -12,9 +13,7 @@ $_SESSION['code_verifier'] = $codeVerifier;
 
 $googleConfig = Config::get('google');
 
-$client = new Google_Client();
-$client->setClientId($googleConfig['google_client_id']);
-$client->setClientSecret($googleConfig['google_client_secret']);
+$client = GoogleClientFactory::getClient();
 $client->setRedirectUri($googleConfig['google_calendar_redirect_uri']);
 $client->setScopes([
     Oauth2::OPENID,

@@ -2,6 +2,7 @@
 
 use App\Auth\AuthFactory;
 use App\Database\DBFactory;
+use App\Services\GoogleClientFactory;
 use App\Utils\Config;
 use App\Utils\Redirect;
 use Google\Service\Calendar;
@@ -9,15 +10,11 @@ use Google\Service\Calendar;
 require_once __DIR__.'/../bootstrap/app.php';
 
 function getEventsList() {
-    $googleConfig = Config::get('google');
 
     $auth = AuthFactory::getAuth();
     $authUserInfo = $auth->getUserInfo();
 
-    $client = new Google_Client();
-    $client->setClientId($googleConfig['google_client_id']);
-    $client->setClientSecret($googleConfig['google_client_secret']);
-    $client->setAccessToken($authUserInfo['calendar_access_token']);
+    $client = GoogleClientFactory::getClient($authUserInfo['calendar_access_token']);
     $service = new Calendar($client);
 
     $optParams = [
@@ -32,7 +29,6 @@ function getEventsList() {
     ];
 
     $eventsListRes = $service->events->listEvents('primary', $optParams);
-//    $eventsListRes = json_decode(file_get_contents(__DIR__.'/eventsFixture.json'), true);
     $eventsList = $eventsListRes['items'];
 
     require __DIR__.'/../src/Views/calendar/eventsList.php';
@@ -56,12 +52,7 @@ if (!$authUserInfo['calendar_access_token']) {
 } else {
     // show events view
 
-    $googleConfig = Config::get('google');
-
-    $client = new Google_Client();
-    $client->setClientId($googleConfig['google_client_id']);
-    $client->setClientSecret($googleConfig['google_client_secret']);
-    $client->setAccessToken($authUserInfo['calendar_access_token']);
+    $client = GoogleClientFactory::getClient($authUserInfo['calendar_access_token']);
 
     try {
         getEventsList();
