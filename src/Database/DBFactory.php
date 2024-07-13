@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Utils;
+namespace App;
 
-class DB
+use App\Utils\Config;
+
+class DBFactory
 {
-    private static self $instance;
+    private static $instance;
     private \PDO $pdo;
 
     private function __construct()
@@ -21,10 +23,10 @@ class DB
 
     public static function getDB(): static
     {
-        if (!self::$instance) {
-            self::$instance = new static();
+        if (!static::$instance) {
+            static::$instance = new static();
         }
-        return self::$instance;
+        return static::$instance;
     }
 
     public function query($query, $params = []): bool|\PDOStatement
