@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Database;
 
 use App\Utils\Config;
 
@@ -39,6 +39,22 @@ class DBFactory
     public function getLastInsertId(): bool|string
     {
         return $this->pdo->lastInsertId();
+    }
+
+    public function fetch($query, $params = []): mixed
+    {
+        return $this->query($query, $params)->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function fetchOne($query, $params = []): array | null
+    {
+        $fetchOneStmt = $this->query($query, $params);
+        $result = $fetchOneStmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if(!$result) {
+            return null;
+        }
+        return $result[0];
     }
 
     public function getPDO(): \PDO
