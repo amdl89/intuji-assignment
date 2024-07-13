@@ -4,7 +4,7 @@ namespace App\Auth;
 
 use App\Database\DBFactory;
 
-class Auth
+class AuthFactory
 {
     private static $instance;
     private array|null $userInfo;
@@ -44,15 +44,14 @@ class Auth
 
     public function getUserById(int $userId)
     {
-        $user = $this->db->fetchOne(
+        return $this->db->fetchOne(
             'SELECT * FROM users where id = :userId LIMIT 1',
-            ['userId' => $userId,]
+            [':userId' => $userId,]
         );
+    }
 
-        if(!$user) {
-            return null;
-        }
-        return $user[0];
+    public function isLoggedIn(): bool {
+        return (bool) $this->getUserInfo();
     }
 
 }
