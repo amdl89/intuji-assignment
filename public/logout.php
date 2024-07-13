@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/../bootstrap/app.php';
 
-use App\Utils\Config;
+use App\Services\GoogleClientFactory;
 use App\Utils\Redirect;
 
 if (session_status() === PHP_SESSION_ACTIVE) {
@@ -12,13 +12,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     $access_token = $_SESSION['__ACCESS_TOKEN'] ?? null;
 
     if ($access_token) {
-        $googleConfig = Config::get('google');
-
-        $client = new Google_Client();
-        $client->setClientId($googleConfig['google_client_id']);
-        $client->setClientSecret($googleConfig['google_client_secret']);
-        $client->setAccessToken($access_token);
-
+        $client = GoogleClientFactory::getClient($access_token);
         // Revoke the token
         $client->revokeToken($client->getAccessToken());
     }
