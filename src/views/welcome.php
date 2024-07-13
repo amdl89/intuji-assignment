@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/Partials/header.php' ?>
+<?php require __DIR__ . '/partials/header.php' ?>
 <main class="container d-flex justify-content-center align-items-center vh-100">
     <div class="d-flex flex-column align-items-center p-3 border-3">
         <h1 class="mb-3">Google Calendar Plugin</h1>
@@ -10,4 +10,4 @@
         </a>
     </div>
 </main>
-<?php require __DIR__ . '/Partials/footer.php' ?>
+<?php require __DIR__ . '/partials/footer.php' ?>
