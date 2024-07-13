@@ -24,7 +24,6 @@ $client->setRedirectUri($googleConfig['google_login_redirect_uri']);
 
 try {
     $accessToken = $client->fetchAccessTokenWithAuthCode($_GET['code'], $_SESSION['code_verifier']);
-    unset($_SESSION['code_verifier']);
 
     if (isset($accessToken['error'])) {
         throw new \Exception('Error fetching token for user: '.$accessToken['error']);
@@ -40,6 +39,7 @@ try {
     if($user = $db->fetchOne($userQuery, [':sid' => $userInfo->getId()])) {
         // user already exists, login user and redirect to home
         if($auth->loginUsingId($user['id'])) {
+            $_SESSION['__ACCESS_TOKEN'] = $accessToken;
             Redirect::path('/home.php');
         }
         throw new \Exception('Login failed');
