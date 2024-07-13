@@ -1,9 +1,12 @@
 <?php
 require_once __DIR__.'/../../bootstrap/app.php';
 
+use App\Auth\Guards;
 use App\Services\AuthUserGoogleClientCalendarApiRequestHandler;
 use App\Services\GoogleClientFactory;
 use App\Utils\Redirect;
+
+Guards::redirectIfNotAuthenticated();
 
 if (!isset($_POST['eventId'])) {
     Redirect::path('/home.php');

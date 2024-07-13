@@ -2,9 +2,12 @@
 require_once __DIR__.'/../../bootstrap/app.php';
 
 use App\Auth\AuthFactory;
+use App\Auth\Guards;
 use App\Database\DBFactory;
 use App\Services\GoogleClientFactory;
 use App\Utils\Redirect;
+
+Guards::redirectIfNotAuthenticated();
 
 $auth = AuthFactory::getAuth();
 $authUserInfo = $auth->getUserInfo();

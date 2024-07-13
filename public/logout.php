@@ -1,8 +1,11 @@
 <?php
 require_once __DIR__.'/../bootstrap/app.php';
 
+use App\Auth\Guards;
 use App\Services\GoogleClientFactory;
 use App\Utils\Redirect;
+
+Guards::redirectIfNotAuthenticated();
 
 if (session_status() === PHP_SESSION_ACTIVE) {
     session_unset();

@@ -2,11 +2,14 @@
 require_once __DIR__.'/../../../bootstrap/app.php';
 
 use App\Auth\AuthFactory;
+use App\Auth\Guards;
 use App\Database\DBFactory;
 use App\Services\GoogleClientFactory;
 use App\Utils\Config;
 use App\Utils\Redirect;
 use Google\Service\Oauth2;
+
+Guards::redirectIfAuthenticated();
 
 if (!isset($_GET['code'])) {
     $_SESSION['FLASH_MESSAGE'] = [

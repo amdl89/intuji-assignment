@@ -1,11 +1,13 @@
 <?php
+require_once __DIR__.'/../bootstrap/app.php';
 
 use App\Auth\AuthFactory;
+use App\Auth\Guards;
 use App\Services\AuthUserGoogleClientCalendarApiRequestHandler;
 use App\Services\GoogleClientFactory;
 use App\Utils\Redirect;
 
-require_once __DIR__.'/../bootstrap/app.php';
+Guards::redirectIfNotAuthenticated();
 
 $auth = AuthFactory::getAuth();
 $authUserInfo = $auth->getUserInfo();

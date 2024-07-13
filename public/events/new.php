@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__.'/../../bootstrap/app.php';
 
+use App\Auth\Guards;
+
+Guards::redirectIfNotAuthenticated();
+
 $PAGE_TITLE = 'Add event';
 
 $event = [
