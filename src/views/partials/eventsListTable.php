@@ -60,13 +60,17 @@
                     </a>
                     <form class="d-inline-block" action="/events/edit.php" method="post">
                         <input type="hidden" name="eventId" value="<?= $event['id'] ?>">
-                        <button title="Edit event" type="submit" class="btn btn-sm btn-warning">
+                        <button <?= !$event['organizer']['self'] ? 'disabled' : '' ?> title="Edit event" type="submit"
+                                                                                      class="btn btn-sm btn-warning"
+                        >
                             <i class="bi bi-pencil-square"></i>
                         </button>
                     </form>
                     <form class="d-inline-block" action="/events/delete.php" method="post">
                         <input type="hidden" name="eventId" value="<?= $event['id'] ?>">
-                        <button title="Delete event" type="submit" class="btn btn-sm btn-danger">
+                        <button <?= !$event['organizer']['self'] ? 'disabled' : '' ?> title="Delete event" type="submit"
+                                                                                      class="btn btn-sm btn-danger"
+                        >
                             <i class="bi bi-trash-fill"></i>
                         </button>
                     </form>
