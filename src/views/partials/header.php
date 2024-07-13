@@ -15,3 +15,8 @@
     <script defer src="/assets/js/app.js"></script>
 </head>
 <body class="bg-body-secondary">
+<?php require __DIR__ . '/flashMessage.php' ?>
+
+<?php if(isset($_SESSION['__USER_INFO'])): ?>
+    <?php require __DIR__ . '/nav.php' ?>
+<?php endif; ?>
