@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Auth\AuthFactory;
 use App\Utils\Config;
+use Google\Service\Calendar;
 
 class GoogleClientFactory
 {
@@ -17,6 +19,18 @@ class GoogleClientFactory
             $client->setAccessToken($token);
         }
         return $client;
+    }
+
+    public static function getCalendarServiceForAuthUser(): Calendar
+    {
+        $auth = AuthFactory::getAuth();
+        $authUserInfo = $auth->getUserInfo();
+
+        if(!$authUserInfo) {
+            throw new \Exception('User not logged in.');
+        }
+        $googleClient = static::getClient($authUserInfo['calendar_access_token']);
+        return new Calendar($googleClient);
     }
 
 }
