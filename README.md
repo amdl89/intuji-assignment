@@ -21,8 +21,8 @@ GOOGLE_CLIENT_ID=your-client-id
 GOOGLE_CLIENT_SECRET=your-client-secret
 ```
 Register the following redirect URIs for app:
-- http://localhost:8080/oauth/callback/login.php
--  http://localhost:8080/oauth/callback/calendar.php
+- http://localhost/oauth/callback/login.php
+-  http://localhost/oauth/callback/calendar.php
 
 Create database file
 ```bash
@@ -32,8 +32,21 @@ Build project
 ```bash
 sudo docker-compose build
 ```
-Run project (Make sure port 8080 is free)
+Run project (Make sure port 80 is free)
 ```bash
 sudo docker-compose up -d
 ```
-The project will run at `localhost:8080`
+
+Install composer dependencies
+```bash
+sudo docker exec -it intuji-assignment_app_1 /bin/bash
+composer install
+```
+
+Initialize db schema
+```bash
+sudo docker exec -it intuji-assignment_app_1 /bin/bash
+php src/Database/initDb.php 
+```
+
+The project will run at `localhost`
